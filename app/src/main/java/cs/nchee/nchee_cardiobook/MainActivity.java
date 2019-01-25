@@ -29,6 +29,12 @@ public class MainActivity extends AppCompatActivity {
 
         measurements = new ArrayList<>();
         measurements.add(new Measurement(Calendar.getInstance(), 1, 1, 1, "Hello world."));
+        measurements.add(new Measurement(Calendar.getInstance(), 1, 1, 1, "Hello world."));
         measurementsAdapter.notifyDataSetChanged();
+    }
+
+    // getter for dataset
+    public ArrayList<Measurement> getMeasurements() {
+        return measurements;
     }
 }
