@@ -18,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 class MeasurementsAdapter extends RecyclerView.Adapter<MeasurementsAdapter.MyViewHolder> {
+
     private MainActivity mainActivity;          // the entire activity to get information
 
     public MeasurementsAdapter(MainActivity _mainActivity) {
