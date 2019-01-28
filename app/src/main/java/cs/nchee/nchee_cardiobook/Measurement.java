@@ -2,13 +2,14 @@
 package cs.nchee.nchee_cardiobook;
 
 
+import java.io.Serializable;
 import java.util.Calendar;
 
 /**
  *  Measurement class that stores information about each measurement entered by the user
  */
 
-public class Measurement {
+public class Measurement implements Serializable {
     private Calendar dateAndTime;
     private int systolic;
     private int heartrate;

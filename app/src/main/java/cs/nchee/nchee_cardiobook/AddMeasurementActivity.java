@@ -1,5 +1,7 @@
 package cs.nchee.nchee_cardiobook;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -54,6 +56,9 @@ public class AddMeasurementActivity extends AppCompatActivity implements View.On
         Measurement measurement = new Measurement(_dateAndTime,
                 _systolic, _diastolic, _heartrate, _comment);
 
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra("result", measurement);
+        setResult(Activity.RESULT_OK, returnIntent);
         finish();
     }
 

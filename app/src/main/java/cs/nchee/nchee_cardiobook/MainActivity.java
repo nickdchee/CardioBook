@@ -1,11 +1,13 @@
 package cs.nchee.nchee_cardiobook;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -45,10 +47,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), AddMeasurementActivity.class);
-                //intent.putExtra("Pos", measurements);
-                startActivity(intent);
+
+                // source: https://stackoverflow.com/questions/10407159/how-to-manage-startactivityforresult-on-android
+                startActivityForResult(intent, 1);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == Activity.RESULT_OK) {
+            Measurement new_measurement = (Measurement) data.getSerializableExtra("result");
+            measurements.add(new_measurement);
+            measurementsAdapter.notifyDataSetChanged();
+        }
     }
 
     // getter for dataset

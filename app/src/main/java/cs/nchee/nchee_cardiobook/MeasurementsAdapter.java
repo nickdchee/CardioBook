@@ -2,6 +2,7 @@ package cs.nchee.nchee_cardiobook;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -33,7 +34,8 @@ class MeasurementsAdapter extends RecyclerView.Adapter<MeasurementsAdapter.MyVie
         private TextView diastolicTextView;
         private TextView heartrateTextView;
         private TextView commentTextView;
-        private ImageButton option;                     // options button for Add/Edit/Delete
+        private ImageButton option;                     // options button for Edit/Delete
+        private FloatingActionButton addButton;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -44,6 +46,7 @@ class MeasurementsAdapter extends RecyclerView.Adapter<MeasurementsAdapter.MyVie
             heartrateTextView = (TextView) itemView.findViewById(R.id.tvHeartrate);
             commentTextView = (TextView) itemView.findViewById(R.id.tvComment);
             option = (ImageButton) itemView.findViewById(R.id.ibOption);
+            addButton = (FloatingActionButton) itemView.findViewById(R.id.fabMeasurement);
         }
 
         @Override
