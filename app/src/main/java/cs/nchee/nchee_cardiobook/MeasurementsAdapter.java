@@ -12,8 +12,6 @@ import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
-import cs.nchee.nchee_cardiobook.ViewEditMeasurementActivity;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -53,7 +51,6 @@ class MeasurementsAdapter extends RecyclerView.Adapter<MeasurementsAdapter.MyVie
         public void onClick(View v){
             int position = getAdapterPosition();
         }
-
 
     }
 
