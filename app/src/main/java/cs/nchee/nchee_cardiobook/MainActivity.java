@@ -16,7 +16,6 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView rvMeasurements;
     private RecyclerView.Adapter measurementsAdapter;
     private RecyclerView.LayoutManager layoutManager;
-    private int pos_index;
     public ArrayList<Measurement> measurements;
 
 

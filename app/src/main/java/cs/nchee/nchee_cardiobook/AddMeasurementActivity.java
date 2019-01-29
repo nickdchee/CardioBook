@@ -9,7 +9,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -53,7 +55,6 @@ public class AddMeasurementActivity extends AppCompatActivity implements View.On
             public void onDateSet(DatePicker view, int year, int monthOfYear,
                                   int dayOfMonth) {
                 // TODO Auto-generated method stub
-                // im gay
                 calendar.set(Calendar.YEAR, year);
                 calendar.set(Calendar.MONTH, monthOfYear);
                 calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
@@ -73,14 +74,19 @@ public class AddMeasurementActivity extends AppCompatActivity implements View.On
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bDone:
-                Calendar dateAndTime = Calendar.getInstance();
+                // check if inputs are left blank
+                if (isEmpty(systolicText) || isEmpty(diastolicText) || isEmpty(heartrateText)
+                        || calendar == null) {
+                    Toast.makeText(this, "One or more fields is empty!", Toast.LENGTH_SHORT).show();
+                    break;
+                }
+
                 int systolic = Integer.parseInt(systolicText.getText().toString());
                 int diastolic = Integer.parseInt(diastolicText.getText().toString());
                 int heartrate = Integer.parseInt(heartrateText.getText().toString());
                 String comment = commentText.getText().toString();
-                addMeasurement(dateAndTime, systolic, diastolic, heartrate, comment);
+                addMeasurement(calendar, systolic, diastolic, heartrate, comment);
                 break;
-                // im gay
             case R.id.bDate:
                 new DatePickerDialog(this, date, calendar
                         .get(Calendar.YEAR), calendar.get(Calendar.MONTH),
@@ -89,6 +95,11 @@ public class AddMeasurementActivity extends AppCompatActivity implements View.On
             default:
                 break;
         }
+    }
+
+    // For checking required fields.
+    private boolean isEmpty(TextInputEditText tietText) {
+        return (tietText.getText().toString().matches(""));
     }
 
     private void addMeasurement(Calendar _dateAndTime, int _systolic
