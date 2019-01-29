@@ -110,6 +110,8 @@ class MeasurementsAdapter extends RecyclerView.Adapter<MeasurementsAdapter.MyVie
                 // create intents here and start new activity
                 Intent intent = new Intent(holder.itemView.getContext(),
                         ViewEditMeasurementActivity.class);
+                intent.putExtra("data", mainActivity.measurements.get(holder.getAdapterPosition()));
+
                 holder.itemView.getContext().startActivity(intent);
             }
 
