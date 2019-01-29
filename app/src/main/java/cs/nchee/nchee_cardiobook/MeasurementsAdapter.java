@@ -113,6 +113,7 @@ class MeasurementsAdapter extends RecyclerView.Adapter<MeasurementsAdapter.MyVie
                 intent.putExtra("data", mainActivity.measurements.get(holder.getAdapterPosition()));
 
                 holder.itemView.getContext().startActivity(intent);
+                notifyItemChanged(holder.getAdapterPosition());
             }
 
             void clickDelete() {

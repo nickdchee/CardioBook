@@ -73,20 +73,6 @@ public class AddMeasurementActivity extends AppCompatActivity implements View.On
 
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.action_settings:
-                // check if inputs are left blank
-                if (isEmpty(systolicText) || isEmpty(diastolicText) || isEmpty(heartrateText)
-                        || calendar == null) {
-                    Toast.makeText(this, "One or more fields is empty!", Toast.LENGTH_SHORT).show();
-                    break;
-                }
-
-                int systolic = Integer.parseInt(systolicText.getText().toString());
-                int diastolic = Integer.parseInt(diastolicText.getText().toString());
-                int heartrate = Integer.parseInt(heartrateText.getText().toString());
-                String comment = commentText.getText().toString();
-                addMeasurement(calendar, systolic, diastolic, heartrate, comment);
-                break;
             case R.id.bDate:
                 new DatePickerDialog(this, R.style.DialogTheme, date, calendar
                         .get(Calendar.YEAR), calendar.get(Calendar.MONTH),
