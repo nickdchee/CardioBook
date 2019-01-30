@@ -1,5 +1,6 @@
 package cs.nchee.nchee_cardiobook;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -20,6 +21,7 @@ import java.util.Calendar;
 class MeasurementsAdapter extends RecyclerView.Adapter<MeasurementsAdapter.MyViewHolder> {
 
     private MainActivity mainActivity;          // the entire activity to get information
+    private int currentPos;
 
     public MeasurementsAdapter(MainActivity _mainActivity) {
         mainActivity = _mainActivity;
@@ -110,10 +112,9 @@ class MeasurementsAdapter extends RecyclerView.Adapter<MeasurementsAdapter.MyVie
                 // create intents here and start new activity
                 Intent intent = new Intent(holder.itemView.getContext(),
                         ViewEditMeasurementActivity.class);
-                intent.putExtra("data", mainActivity.measurements.get(holder.getAdapterPosition()));
-
-                holder.itemView.getContext().startActivity(intent);
-                notifyItemChanged(holder.getAdapterPosition());
+                currentPos = holder.getAdapterPosition();
+                intent.putExtra("edit", mainActivity.measurements.get(holder.getAdapterPosition()));
+                mainActivity.startActivityForResult(intent, 1);
             }
 
             void clickDelete() {
@@ -123,6 +124,12 @@ class MeasurementsAdapter extends RecyclerView.Adapter<MeasurementsAdapter.MyVie
                 notifyDataSetChanged();
             }
         });
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Measurement edit_measurement = (Measurement) data.getSerializableExtra("edit");
+        mainActivity.getMeasurements().set(currentPos, edit_measurement);
+        notifyDataSetChanged();
     }
 
     @Override

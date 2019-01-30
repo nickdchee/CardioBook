@@ -14,7 +14,7 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView rvMeasurements;
-    private RecyclerView.Adapter measurementsAdapter;
+    private MeasurementsAdapter measurementsAdapter;
     private RecyclerView.LayoutManager layoutManager;
     public ArrayList<Measurement> measurements;
 
@@ -50,10 +50,19 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
         if (resultCode == Activity.RESULT_OK) {
             Measurement new_measurement = (Measurement) data.getSerializableExtra("result");
-            measurements.add(new_measurement);
-            measurementsAdapter.notifyDataSetChanged();
+
+            //  nothing was returned
+            if (new_measurement == null) {
+                measurementsAdapter.onActivityResult(requestCode, resultCode, data);
+            }
+
+            else {
+                measurements.add(new_measurement);
+                measurementsAdapter.notifyDataSetChanged();
+            }
         }
     }
 

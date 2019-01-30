@@ -40,7 +40,7 @@ public class ViewEditMeasurementActivity extends AppCompatActivity {
 
         // set everything via intent
         Intent intent = getIntent();
-        Measurement measurement = (Measurement) intent.getSerializableExtra("data");
+        Measurement measurement = (Measurement) intent.getSerializableExtra("edit");
 
         systolicText.setText(Integer.toString(measurement.getSystolic()));
         heartrateText.setText(Integer.toString(measurement.getHeartrate()));
@@ -95,7 +95,7 @@ public class ViewEditMeasurementActivity extends AppCompatActivity {
         Measurement measurement = new Measurement(_dateAndTime,
                 _systolic, _diastolic, _heartrate, _comment);
         Intent returnIntent = new Intent();
-        returnIntent.putExtra("result", measurement);
+        returnIntent.putExtra("edit", measurement);
         setResult(Activity.RESULT_OK, returnIntent);
         finish();
     }
