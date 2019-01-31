@@ -2,6 +2,7 @@ package cs.nchee.nchee_cardiobook;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
@@ -20,7 +21,7 @@ import java.util.Calendar;
 
 class MeasurementsAdapter extends RecyclerView.Adapter<MeasurementsAdapter.MyViewHolder> {
 
-    private MainActivity mainActivity;          // the entire activity to get information
+    private MainActivity mainActivity;          // passed reference to entire activity to get array list
     private int currentPos;
 
     public MeasurementsAdapter(MainActivity _mainActivity) {
@@ -76,7 +77,17 @@ class MeasurementsAdapter extends RecyclerView.Adapter<MeasurementsAdapter.MyVie
         String f_DateAndTime = dateFormat.format(dateAndTime.getTime());
         holder.dateAndTimeTextView.setText(f_DateAndTime);
         holder.systolicTextView.setText(String.format("%d mmHg", currentMeasurement.getSystolic()));
+
+        if (currentMeasurement.getSystolic() < 90 || currentMeasurement.getSystolic() > 140) {
+            holder.diastolicTextView.setTextColor(Color.RED);
+        }
+
         holder.diastolicTextView.setText(String.format("%d mmHg", currentMeasurement.getDiastolic()));
+
+        if (currentMeasurement.getDiastolic() < 60 || currentMeasurement.getDiastolic() > 90) {
+            holder.systolicTextView.setTextColor(Color.RED);
+        }
+
         holder.heartrateTextView.setText(String.format("%d bpm", currentMeasurement.getHeartrate()));
         holder.commentTextView.setText(currentMeasurement.getComment());
 
@@ -122,6 +133,7 @@ class MeasurementsAdapter extends RecyclerView.Adapter<MeasurementsAdapter.MyVie
                 // TODO: Make this get an instance of the measurement from backend.
                 mainActivity.getMeasurements().remove(holder.getAdapterPosition());
                 notifyDataSetChanged();
+                mainActivity.saveInFile();
             }
         });
     }

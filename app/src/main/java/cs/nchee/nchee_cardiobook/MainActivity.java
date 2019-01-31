@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void saveInFile() {
+    public void saveInFile() {
         try {
             FileOutputStream fos = openFileOutput(FILENAME, 0);
             OutputStreamWriter writer = new OutputStreamWriter(fos);
