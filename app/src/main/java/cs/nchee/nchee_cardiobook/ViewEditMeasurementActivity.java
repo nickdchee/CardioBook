@@ -27,6 +27,8 @@ public class ViewEditMeasurementActivity extends AppCompatActivity {
     private TextView dateText;
     private DatePickerDialog.OnDateSetListener date;
     final Calendar calendar = Calendar.getInstance();
+    private int hour;
+    private int minutes;
 
 
     @Override
@@ -61,13 +63,29 @@ public class ViewEditMeasurementActivity extends AppCompatActivity {
                 calendar.set(Calendar.YEAR, year);
                 calendar.set(Calendar.MONTH, monthOfYear);
                 calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                updateLabel();
 
                 // create a timepickerdialog here
+                showTimePicker();
             }
 
         };
 
+    }
+
+    private void showTimePicker() {
+        final Calendar calendar = Calendar.getInstance();
+        hour = calendar.get(Calendar.HOUR_OF_DAY);
+        minutes = calendar.get(Calendar.MINUTE);
+
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                hour = hourOfDay;
+                minutes = minute;
+                updateLabel();
+            }
+        }, hour, minutes, false);
+        timePickerDialog.show();
     }
 
     // source: https://stackoverflow.com/questions/14933330/datepicker-how-to-popup-datepicker-when-click-on-edittext

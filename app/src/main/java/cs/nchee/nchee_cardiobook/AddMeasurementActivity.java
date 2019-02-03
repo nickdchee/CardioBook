@@ -2,6 +2,7 @@ package cs.nchee.nchee_cardiobook;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
@@ -12,9 +13,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -29,6 +32,8 @@ public class AddMeasurementActivity extends AppCompatActivity implements View.On
     private TextView dateText;
     private DatePickerDialog.OnDateSetListener date;
     final Calendar calendar = Calendar.getInstance();
+    private int hour;
+    private int minutes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,19 +63,44 @@ public class AddMeasurementActivity extends AppCompatActivity implements View.On
                 calendar.set(Calendar.YEAR, year);
                 calendar.set(Calendar.MONTH, monthOfYear);
                 calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                updateLabel();
+                showTimePicker();
             }
 
         };
 
     }
 
-    // source: https://stackoverflow.com/questions/14933330/datepicker-how-to-popup-datepicker-when-click-on-edittext
-    private void updateLabel() {
-        DateFormat dateFormat = new SimpleDateFormat("HH:mm | yyyy-MM-dd");
-        dateText.setText(dateFormat.format(calendar.getTime()));
+    private void showTimePicker() {
+        final Calendar calendar = Calendar.getInstance();
+        hour = calendar.get(Calendar.HOUR_OF_DAY);
+        minutes = calendar.get(Calendar.MINUTE);
+
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                hour = hourOfDay;
+                minutes = minute;
+                updateLabel();
+            }
+        }, hour, minutes, false);
+        timePickerDialog.show();
     }
 
+    // source: https://stackoverflow.com/questions/14933330/datepicker-how-to-popup-datepicker-when-click-on-edittext
+    private void updateLabel() {
+        DateFormat dateTimeFormat = new SimpleDateFormat("HH:mm | yyyy-MM-dd");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String dateString = dateFormat.format(calendar.getTime());
+        String dateTime = Integer.toString(hour) + ":" + Integer.toString(minutes) + " | " + dateString;
+        try {
+            dateText.setText(dateTimeFormat.format(dateTimeFormat.parse(dateTime)));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    //Source:  https://stackoverflow.com/questions/38604157/android-date-time-picker-in-one-dialog
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bDate:
