@@ -1,3 +1,9 @@
+/*
+ * Developed by Nicholas Chee on 03/02/19 2:15 AM.
+ * Last Modified 02/02/19 11:54 PM.
+ * Copyright (c) 2019. All rights reserved.
+ */
+
 package cs.nchee.nchee_cardiobook;
 
 import android.app.Activity;
@@ -21,20 +27,35 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+/**
+ * AddMeasurementActivity class that launches when the user clicks on the FloatingActionButton
+ * on the bottom right corner of the screen. This class differs slightly from
+ * the ViewEditMeasurementActivity class in a few ways, i.e. no data being entered from a
+ * Measurement object, as well as passing a "result" string as a key.
+ */
 public class AddMeasurementActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button buttonDone;              // TODO: Change to app bar.
-    private Button buttonDate;
     private TextInputEditText systolicText;
     private TextInputEditText heartrateText;
     private TextInputEditText diastolicText;
     private TextInputEditText commentText;
     private TextView dateText;
-    private DatePickerDialog.OnDateSetListener date;
-    final Calendar calendar = Calendar.getInstance();
+
+    // for HH:mm without using Calendar.getTime()
     private int hour;
     private int minutes;
 
+    // buttons
+    private Button buttonDone;
+    private Button buttonDate;
+
+    // get an instance of the calendar object (NOT MODIFIABLE)
+    private DatePickerDialog.OnDateSetListener date;
+    final Calendar calendar = Calendar.getInstance();
+
+    /**
+     * Initialize all our variables.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +74,11 @@ public class AddMeasurementActivity extends AppCompatActivity implements View.On
         commentText = findViewById(R.id.userComment);
         dateText = findViewById(R.id.tvEditDateAndTime);
 
-        // source: https://stackoverflow.com/questions/14933330/datepicker-how-to-popup-datepicker-when-click-on-edittext
+        /**
+         * When finishing DatePicker dialog prompt, we set the calendar object
+         * to have the dates entered in the DatePickerDialog object.
+         * Source: https://stackoverflow.com/questions/14933330/datepicker-how-to-popup-datepicker-when-click-on-edittext
+         */
         date = new DatePickerDialog.OnDateSetListener() {
 
             @Override
@@ -67,9 +92,11 @@ public class AddMeasurementActivity extends AppCompatActivity implements View.On
             }
 
         };
-
     }
 
+    /**
+     * Creates a TimePickerDialog object.
+     */
     private void showTimePicker() {
         final Calendar calendar = Calendar.getInstance();
         hour = calendar.get(Calendar.HOUR_OF_DAY);
@@ -86,7 +113,10 @@ public class AddMeasurementActivity extends AppCompatActivity implements View.On
         timePickerDialog.show();
     }
 
-    // source: https://stackoverflow.com/questions/14933330/datepicker-how-to-popup-datepicker-when-click-on-edittext
+    /**
+     * Updates the date TextView object to show the entered values from the dialogs.
+     * Source: https://stackoverflow.com/questions/14933330/datepicker-how-to-popup-datepicker-when-click-on-edittext
+     */
     private void updateLabel() {
         DateFormat dateTimeFormat = new SimpleDateFormat("HH:mm | yyyy-MM-dd");
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -100,7 +130,9 @@ public class AddMeasurementActivity extends AppCompatActivity implements View.On
 
     }
 
-    //Source:  https://stackoverflow.com/questions/38604157/android-date-time-picker-in-one-dialog
+    /**
+     * For checking if date Button is clicked.
+     */
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bDate:
@@ -113,11 +145,16 @@ public class AddMeasurementActivity extends AppCompatActivity implements View.On
         }
     }
 
-    // For checking required fields.
+    /**
+     * For checking if required text fields are left blank.
+     */
     private boolean isEmpty(TextInputEditText tietText) {
         return (tietText.getText().toString().matches(""));
     }
 
+    /**
+     * Add measurements.
+     */
     private void addMeasurement(Calendar _dateAndTime, int _systolic
             ,int _diastolic, int _heartrate, String _comment) {
 
@@ -129,7 +166,10 @@ public class AddMeasurementActivity extends AppCompatActivity implements View.On
         finish();
     }
 
-    // source: https://stackoverflow.com/questions/35913195/is-any-option-to-add-tick-mark-on-the-right-side-of-the-toolbar
+    /**
+     * Used to add check bar on top right of the app bar.
+     * Source: https://stackoverflow.com/questions/35913195/is-any-option-to-add-tick-mark-on-the-right-side-of-the-toolbar
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -137,7 +177,12 @@ public class AddMeasurementActivity extends AppCompatActivity implements View.On
         return true;
     }
 
-    // source: https://developer.android.com/training/appbar/actions
+    /**
+     * Fires when user clicks on the tick button. This checks if any of the entries
+     * are left blank. If so, a Toast object is used to notify that the
+     * user left a field empty. Otherwise, we add the measurement.
+     * Source: https://developer.android.com/training/appbar/actions
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -157,8 +202,8 @@ public class AddMeasurementActivity extends AppCompatActivity implements View.On
                 return true;
 
             default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
+                // if we got here, the user's action was not recognized.
+                // invoke the superclass to handle it.
                 return super.onOptionsItemSelected(item);
 
         }

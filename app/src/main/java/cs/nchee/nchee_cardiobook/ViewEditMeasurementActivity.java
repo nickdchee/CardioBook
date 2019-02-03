@@ -27,8 +27,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 /**
- * ViewEditMeasurementActivity that launches when a user presses on "Edit" in a
- * PopupMenu object. This class differs slightly from the AddMeasurements activity, in
+ * ViewEditMeasurementActivity class that launches when a user presses on "Edit" in a
+ * PopupMenu object. This class differs slightly from the AddMeasurement activity, in
  * that we want to preserve the data in the Measurement object that led us to this activity.
  * So, we "inflate" the TextView objects with the Measurement object's entries.
  */
@@ -57,6 +57,8 @@ public class ViewEditMeasurementActivity extends AppCompatActivity implements Vi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_edit_measurement);
+        setTitle("Edit measurement");
+
 
         buttonDate = findViewById(R.id.bDate);
         buttonDate.setOnClickListener(this);
