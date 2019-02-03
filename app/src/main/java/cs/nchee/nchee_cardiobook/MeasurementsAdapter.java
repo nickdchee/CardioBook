@@ -9,7 +9,6 @@ package cs.nchee.nchee_cardiobook;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -103,7 +102,7 @@ class MeasurementsAdapter extends RecyclerView.Adapter<MeasurementsAdapter.MyVie
 
         // get the current Measurement's entries, and format each entry to be
         // place into the TextView objects
-        Measurement currentMeasurement = mainActivity.measurements.get(position);
+        Measurement currentMeasurement = mainActivity.getMeasurements().get(position);
         DateFormat dateFormat = new SimpleDateFormat("HH:mm | yyyy-MM-dd");
         Calendar dateAndTime = currentMeasurement.getDateAndTime();
         String f_DateAndTime = dateFormat.format(dateAndTime.getTime());
@@ -177,7 +176,7 @@ class MeasurementsAdapter extends RecyclerView.Adapter<MeasurementsAdapter.MyVie
                 // pass Measurement object that user is trying to edit
                 // with key = "edit"
                 intent.putExtra("edit",
-                        mainActivity.measurements.get(holder.getAdapterPosition()));
+                        mainActivity.getMeasurements().get(holder.getAdapterPosition()));
                 // this gets called in MainActivity, which invokes onActivityResult
                 // in this class
                 mainActivity.startActivityForResult(intent, 1);
@@ -212,6 +211,6 @@ class MeasurementsAdapter extends RecyclerView.Adapter<MeasurementsAdapter.MyVie
      */
     @Override
     public int getItemCount() {
-        return mainActivity.measurements.size();
+        return mainActivity.getMeasurements().size();
     }
 }

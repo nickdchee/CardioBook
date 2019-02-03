@@ -43,7 +43,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     // measurements data to bind adapter to, and to serialize
-    public ArrayList<Measurement> measurements;
+    private ArrayList<Measurement> measurements;
     private RecyclerView rvMeasurements;
     private MeasurementsAdapter measurementsAdapter;
     private RecyclerView.LayoutManager layoutManager;
