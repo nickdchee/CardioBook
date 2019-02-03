@@ -79,12 +79,12 @@ public class MainActivity extends AppCompatActivity {
          */
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), AddMeasurementActivity.class);
+                public void onClick(View view) {
+                    Intent intent = new Intent(view.getContext(), AddMeasurementActivity.class);
 
-                // using this to get back the results of an intent
-                // Source: https://stackoverflow.com/questions/10407159/how-to-manage-startactivityforresult-on-android
-                startActivityForResult(intent, 1);
+                    // using this to get back the results of an intent
+                    // Source: https://stackoverflow.com/questions/10407159/how-to-manage-startactivityforresult-on-android
+                    startActivityForResult(intent, 1);
             }
         });
     }
@@ -162,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
      * using gson to serialize data.
      * Source: https://github.com/ta301-ks/lonelyTwitter/
      */
-    public void saveInFile() {
+    private void saveInFile() {
         try {
             FileOutputStream fos = openFileOutput(FILENAME, 0);
             OutputStreamWriter writer = new OutputStreamWriter(fos);
