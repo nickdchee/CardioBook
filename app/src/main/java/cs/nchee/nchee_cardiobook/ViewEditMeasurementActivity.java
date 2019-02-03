@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -19,7 +20,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class ViewEditMeasurementActivity extends AppCompatActivity {
+public class ViewEditMeasurementActivity extends AppCompatActivity implements View.OnClickListener {
     private TextInputEditText systolicText;
     private TextInputEditText heartrateText;
     private TextInputEditText diastolicText;
@@ -29,12 +30,16 @@ public class ViewEditMeasurementActivity extends AppCompatActivity {
     final Calendar calendar = Calendar.getInstance();
     private int hour;
     private int minutes;
+    private Button buttonDate;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_edit_measurement);
+
+        buttonDate = findViewById(R.id.bDate);
+        buttonDate.setOnClickListener(this);
 
         systolicText = findViewById(R.id.userSystolic);
         heartrateText = findViewById(R.id.userHeartrate);
