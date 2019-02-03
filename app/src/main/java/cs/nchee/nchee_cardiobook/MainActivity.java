@@ -162,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
      * using gson to serialize data.
      * Source: https://github.com/ta301-ks/lonelyTwitter/
      */
-    private void saveInFile() {
+    public void saveInFile() {
         try {
             FileOutputStream fos = openFileOutput(FILENAME, 0);
             OutputStreamWriter writer = new OutputStreamWriter(fos);

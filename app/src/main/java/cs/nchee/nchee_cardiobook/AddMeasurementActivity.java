@@ -46,7 +46,6 @@ public class AddMeasurementActivity extends AppCompatActivity implements View.On
     private int minutes;
 
     // buttons
-    private Button buttonDone;
     private Button buttonDate;
 
     // get an instance of the calendar object (NOT MODIFIABLE)
@@ -61,9 +60,6 @@ public class AddMeasurementActivity extends AppCompatActivity implements View.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_measurement);
         setTitle("New measurement");
-
-        buttonDone = findViewById(R.id.bDone);
-        buttonDone.setOnClickListener(this);
 
         buttonDate = findViewById(R.id.bDate);
         buttonDate.setOnClickListener(this);
@@ -200,6 +196,9 @@ public class AddMeasurementActivity extends AppCompatActivity implements View.On
                 String comment = commentText.getText().toString();
                 addMeasurement(calendar, systolic, diastolic, heartrate, comment);
                 return true;
+
+            case R.id.close_settings:
+                finish();
 
             default:
                 // if we got here, the user's action was not recognized.

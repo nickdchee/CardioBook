@@ -209,6 +209,9 @@ public class ViewEditMeasurementActivity extends AppCompatActivity implements Vi
                 addMeasurement(calendar, systolic, diastolic, heartrate, comment);
                 return true;
 
+            case R.id.close_settings:
+                finish();
+
             default:
                 // if we got here, the user's action was not recognized
                 // invoke the superclass to handle it
