@@ -134,8 +134,16 @@ public class ViewEditMeasurementActivity extends AppCompatActivity implements Vi
      * Source: https://stackoverflow.com/questions/14933330/datepicker-how-to-popup-datepicker-when-click-on-edittext
      */
     private void updateLabel() {
-        DateFormat dateFormat = new SimpleDateFormat("HH:mm | yyyy-MM-dd");
-        dateText.setText(dateFormat.format(calendar.getTime()));
+        DateFormat dateTimeFormat = new SimpleDateFormat("HH:mm | yyyy-MM-dd");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String dateString = dateFormat.format(calendar.getTime());
+        String dateTime = Integer.toString(hour) + ":" + Integer.toString(minutes) + " | " + dateString;
+        try {
+            dateText.setText(dateTimeFormat.format(dateTimeFormat.parse(dateTime)));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**

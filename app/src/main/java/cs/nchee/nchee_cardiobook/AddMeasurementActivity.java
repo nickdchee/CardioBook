@@ -120,6 +120,7 @@ public class AddMeasurementActivity extends AppCompatActivity implements View.On
         String dateTime = Integer.toString(hour) + ":" + Integer.toString(minutes) + " | " + dateString;
         try {
             dateText.setText(dateTimeFormat.format(dateTimeFormat.parse(dateTime)));
+            calendar.setTime(dateTimeFormat.parse(dateTime));
         } catch (ParseException e) {
             e.printStackTrace();
         }
