@@ -113,14 +113,18 @@ class MeasurementsAdapter extends RecyclerView.Adapter<MeasurementsAdapter.MyVie
 
         // color the text red if systolic is noteworthy and set it
         if (currentMeasurement.getSystolic() < 90 || currentMeasurement.getSystolic() > 140) {
-            holder.diastolicTextView.setTextColor(Color.RED);
+            holder.systolicTextView.setTextColor(Color.RED);
+        } else {
+            holder.systolicTextView.setTextColor(Color.GRAY);
         }
 
         holder.diastolicTextView.setText(String.format("%d mmHg", currentMeasurement.getDiastolic()));
 
         // color the text red if systolic is noteworthy and set it
         if (currentMeasurement.getDiastolic() < 60 || currentMeasurement.getDiastolic() > 90) {
-            holder.systolicTextView.setTextColor(Color.RED);
+            holder.diastolicTextView.setTextColor(Color.RED);
+        } else {
+            holder.diastolicTextView.setTextColor(Color.GRAY);
         }
 
         holder.heartrateTextView.setText(String.format("%d bpm", currentMeasurement.getHeartrate()));
