@@ -23,6 +23,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -59,7 +60,6 @@ public class ViewEditMeasurementActivity extends AppCompatActivity implements Vi
         setContentView(R.layout.activity_view_edit_measurement);
         setTitle("Edit measurement");
 
-
         buttonDate = findViewById(R.id.bDate);
         buttonDate.setOnClickListener(this);
 
@@ -80,6 +80,8 @@ public class ViewEditMeasurementActivity extends AppCompatActivity implements Vi
         DateFormat dateFormat = new SimpleDateFormat("HH:mm | yyyy-MM-dd");
         dateText.setText(dateFormat.format(measurement.getDateAndTime().getTime()));
         commentText.setText(measurement.getComment());
+
+        calendar.setTime(measurement.getDateAndTime().getTime());
 
         /**
          * When finishing DatePicker dialog prompt, we set the calendar object
